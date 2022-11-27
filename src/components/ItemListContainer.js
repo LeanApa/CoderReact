@@ -1,9 +1,7 @@
-
-
 const ItemListContainer = ({greeting}) => {
   return (
     <div>
-        <h2>{greeting}</h2>
+        <h2 style={{color: "red"}}>{greeting}</h2>
     </div>
   )
 }

@@ -1,8 +1,8 @@
 import ItemCount from "../itemCount/ItemCount";
 import { products } from "../../productsMock";
 import { useEffect, useState } from "react";
-import { ItemList } from "../itemList/ItemList"; 
-
+import { ItemList } from "../itemList/ItemList";
+import { useParams } from "react-router-dom";
 
 const ItemListContainer = ({ greeting }) => {
   const onAdd = (counter) => {
@@ -10,11 +10,15 @@ const ItemListContainer = ({ greeting }) => {
   };
 
   const [items, setItems] = useState([]);
+  const { id } = useParams();
 
   useEffect(() => {
+    const productosFiltrados = products.filter(
+      (producto) => producto.category === id
+    );
     const carga = new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve(products);
+        resolve(id ? productosFiltrados : products);
       }, 2000);
     })
       .then((res) => {
@@ -25,7 +29,7 @@ const ItemListContainer = ({ greeting }) => {
       });
 
     console.log("Se hizo la peticion: ", items);
-  }, []);
+  }, [id]);
 
   return (
     <div>

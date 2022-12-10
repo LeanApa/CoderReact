@@ -1,4 +1,4 @@
-import {CartWidget} from './CartWidget'
+import {CartWidget} from '../cartWidget/CartWidget'
 import { GiClothes } from "react-icons/gi";
 
 export const NavBar = () => {

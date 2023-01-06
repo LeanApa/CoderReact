@@ -5,9 +5,7 @@ import { ItemList } from "../itemList/ItemList";
 import { useParams } from "react-router-dom";
 
 const ItemListContainer = ({ greeting }) => {
-  const onAdd = (counter) => {
-    console.log("onAdd function", counter);
-  };
+  
 
   const [items, setItems] = useState([]);
   const { id } = useParams();
@@ -34,7 +32,6 @@ const ItemListContainer = ({ greeting }) => {
   return (
     <div>
       <h2 style={{ color: "red" }}>{greeting}</h2>
-      <ItemCount stock={4} initial={1} onAdd={onAdd} />
       <ItemList items={items} />
     </div>
   );

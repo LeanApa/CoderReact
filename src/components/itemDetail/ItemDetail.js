@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import ItemCount from "../itemCount/ItemCount";
-import { CartContext } from "../../context/cartContext";
+import { CartContext } from "../../context/CartContext";
 
 export const ItemDetail = ({ producto }) => {
   const { addToCart, getCantidadById } = useContext(CartContext);

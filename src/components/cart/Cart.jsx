@@ -1,30 +1,25 @@
 import { useContext } from "react";
 import { CartContext } from "../../context/cartContext";
+import { CartItem } from "../cartItem/CartItem";
 
 export const Cart = () => {
-  const { cart, clearCart } = useContext(CartContext);
-  console.log(cart);
-  cart.forEach((item) => console.log(item.name));
+  const { cart, clearCart, getTotalPrice } = useContext(CartContext);
 
   return (
-    <div>
+    <div className="d-flex justify-content-around">
       {cart.map((item) => {
-        return (
-          <div key={item.id} className="card" style={{ width: "18rem" }}>
-            <img src={item.img} className="card-img-top" alt={item.name} />
-            <div className="card-body">
-              <h5 className="card-title">{item.name}</h5>
-              <p className="card-text">{item.description}</p>
-              <p className="card-text">${item.price}</p>
-              <p className="card-text">Cantidad: {item.counter}</p>
-            </div>
-          </div>
-        ); 
+        return <CartItem key={item.id} item={item} />;
       })}
-      {cart.length !== 0 ? (
-        <button className="btn btn-primary" onClick={clearCart}>
-          Limpiar carrito
-        </button>
+      {cart.length > 0 ? (
+        <div className="card" style={{ width: "18rem", height: "10rem" }}>
+          <div className="card-body">
+            <h5 className="card-title">Total de productos</h5>
+            <p className="card-text">Precio total: ${getTotalPrice()}</p>
+            <button className="btn btn-primary" onClick={clearCart}>
+              Limpiar carrito
+            </button>
+          </div>
+        </div>
       ) : (
         <h2>El carrito está vacío</h2>
       )}

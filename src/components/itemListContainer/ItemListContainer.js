@@ -1,38 +1,68 @@
-import ItemCount from "../itemCount/ItemCount";
-import { products } from "../../productsMock";
+//import ItemCount from "../itemCount/ItemCount";
 import { useEffect, useState } from "react";
 import { ItemList } from "../itemList/ItemList";
 import { useParams } from "react-router-dom";
+import PulseLoader from "react-spinners/PulseLoader";
+import { getDocs, collection, query, where } from "firebase/firestore";
+import { db } from "../../firebaseConfig";
 
-const ItemListContainer = ({ greeting }) => {
-  
+const override = {
+  display: "block",
+  margin: "100",
+  borderColor: "red",
+};
 
+const ItemListContainer = () => {
   const [items, setItems] = useState([]);
   const { id } = useParams();
+  const [isLoading, setIsLoadig] = useState(false);
 
   useEffect(() => {
-    const productosFiltrados = products.filter(
-      (producto) => producto.category === id
-    );
-    const carga = new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(id ? productosFiltrados : products);
-      }, 2000);
-    })
-      .then((res) => {
-        setItems(res);
-      })
-      .catch((res) => {
-        console.log("Rechazado", res);
-      });
-
-    console.log("Se hizo la peticion: ", items);
+    setIsLoadig(true);
+    const itemColletion = collection(db, "products");
+    if (id) {
+      const q = query(itemColletion, where("category", "==", id));
+      getDocs(q)
+        .then((res) => {
+          const products = res.docs.map((product) => {
+            return {
+              id: product.id,
+              ...product.data(),
+            };
+          });
+          setItems(products);
+          setIsLoadig(false);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      getDocs(itemColletion)
+        .then((res) => {
+          const products = res.docs.map((product) => {
+            return {
+              id: product.id,
+              ...product.data(),
+            };
+          });
+          setItems(products);
+          setIsLoadig(false);
+        })
+        .catch((err) => console.log(err));
+    }
   }, [id]);
 
   return (
     <div>
-      <h2 style={{ color: "red" }}>{greeting}</h2>
-      <ItemList items={items} />
+      {isLoading ? (
+        <PulseLoader
+          color={"green"}
+          cssOverride={override}
+          size={50}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      ) : (
+        <ItemList items={items} />
+      )}
     </div>
   );
 };

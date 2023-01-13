@@ -15,10 +15,7 @@ const App = () => {
       <CartContextProvider>
         <NavBar />
         <Routes>
-          <Route
-            path="/"
-            element={<ItemListContainer greeting={"Hola Leandro!"} />}
-          />
+          <Route path="/" element={<ItemListContainer />} />
           <Route
             path="/category/:id"
             element={<ItemListContainer greeting={"Hola Leandro!"} />}

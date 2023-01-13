@@ -6,7 +6,6 @@ export const ItemDetail = ({ producto }) => {
   const { addToCart, getCantidadById } = useContext(CartContext);
 
   const onAdd = (counter) => {
-    console.log("onAdd function", counter);
     addToCart({ ...producto, counter });
   };
 

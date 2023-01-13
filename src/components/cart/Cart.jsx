@@ -12,7 +12,6 @@ export const Cart = () => {
   const [comprar, setComprar] = useState(false);
   const [orderId, setOrderId] = useState(null);
   const [order, setOrder] = useState({});
-  console.log(orderId);
 
   useEffect(() => {
     if (orderId) {

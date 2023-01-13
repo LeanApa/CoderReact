@@ -9,12 +9,10 @@ function ItemCount({ stock, initial = 1, onAdd }) {
 
   const sumar = () => {
     counter < stock && setCounter(counter + 1);
-    console.log("El contador luego de sumar es", counter);
   };
 
   const restar = () => {
     counter > 1 && setCounter(counter - 1);
-    console.log("El contador luego de restar es", counter);
   };
 
   return (

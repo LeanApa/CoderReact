@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const Item = ({ element }) => {
-  console.log("esta es la url de la imagen", element.img);
   return (
     <div className="card ms-2 me-2 m-2" style={{ width: "18rem" }}>
       <img src={element.img} className="card-img-top" alt={element.name} />

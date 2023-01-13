@@ -11,7 +11,6 @@ export const CartContextProvider = ({ children }) => {
         if (item.id === elemento.id) {
           let newItem = {
             ...item,
-            // counter: item.counter + elemento.counter,
             counter: elemento.counter,
           };
 

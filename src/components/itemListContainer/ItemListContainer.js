@@ -1,4 +1,3 @@
-//import ItemCount from "../itemCount/ItemCount";
 import { useEffect, useState } from "react";
 import { ItemList } from "../itemList/ItemList";
 import { useParams } from "react-router-dom";
@@ -51,7 +50,7 @@ const ItemListContainer = () => {
   }, [id]);
 
   return (
-    <div>
+    <div className="ms-5">
       {isLoading ? (
         <PulseLoader
           color={"green"}

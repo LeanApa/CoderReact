@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import CustomButton from "../customButton/CustomButton";
 
 function ItemCount({ stock, initial = 1, onAdd }) {
   const [counter, setCounter] = useState(initial);
@@ -14,18 +13,16 @@ function ItemCount({ stock, initial = 1, onAdd }) {
   };
 
   const restar = () => {
-    /* counter > initial && setCounter(counter - 1); */
     counter > 1 && setCounter(counter - 1);
     console.log("El contador luego de restar es", counter);
   };
 
   return (
-    <div>
-      {/* <CustomButton  /> */}
-      <button onClick={sumar}>Sumar</button>
+    <div className="text-center">
+      <button className="btn btn-primary m-2" onClick={sumar}>Sumar</button>
       <span>{counter}</span>
-      <button onClick={restar}>Restar</button>
-      <button onClick={() => onAdd(counter)}>Agregar al carrito</button>
+      <button className="btn btn-primary m-2" onClick={restar}>Restar</button>
+      <button className="btn btn-primary m-2" onClick={() => onAdd(counter)}>Agregar al carrito</button>
     </div>
   );
 }

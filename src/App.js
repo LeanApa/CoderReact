@@ -2,14 +2,11 @@ import { NavBar } from "./components/navBar/NavBar";
 import ItemListContainer from "./components/itemListContainer/ItemListContainer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ItemDetailContainer } from "./components/itemDetailContainer/ItemDetailContainer";
-import { CartWidget } from "./components/cartWidget/CartWidget";
 import { Form } from "./components/form/Form";
 import { Cart } from "./components/cart/Cart";
 import { CartContextProvider } from "./context/cartContext";
 
 const App = () => {
-  // const check = false
-
   return (
     <BrowserRouter>
       <CartContextProvider>

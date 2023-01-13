@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export const NavBar = () => {
   return (
-    <nav className="navbar navbar-expand-lg bg-success">
+    <nav className="navbar navbar-expand-lg bg-success mb-4">
       <div className="container-fluid ">
         <Link className="navbar-brand " to="/">
           <GiClothes size={45} color={"#fff"} />

@@ -1,4 +1,4 @@
-import React from "react";
+import Swal from 'sweetalert2'
 import { useState } from "react";
 import {
   addDoc,
@@ -11,28 +11,38 @@ import { db } from "../../firebaseConfig";
 
 export const Form = ({ cart, getTotalPrice, setOrderId, clearCart }) => {
   const [userData, setUserData] = useState({ name: "", phone: "", email: "" });
+  const [checkEmail, setCheckEmail] = useState("");
   const handleSubmit = (event) => {
     event.preventDefault();
-    const order = {
-      buyer: userData,
-      items: cart,
-      total: getTotalPrice(),
-      date: serverTimestamp(),
-    };
+    if (checkEmail !== userData.email) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Revise haber ingresado correctamente su email',
+        footer: 'Ambos correos deben coincidir'
+      })
+    } else {
+      const order = {
+        buyer: userData,
+        items: cart,
+        total: getTotalPrice(),
+        date: serverTimestamp(),
+      };
 
-    const orderCollection = collection(db, "orders");
+      const orderCollection = collection(db, "orders");
 
-    addDoc(orderCollection, order)
-      .then((res) => setOrderId(res.id))
-      .catch((err) => console.log(err));
+      addDoc(orderCollection, order)
+        .then((res) => setOrderId(res.id))
+        .catch((err) => console.log(err));
 
-    cart.map((item) => {
-      updateDoc(doc(db, "products", item.id), {
-        stock: item.stock - item.counter,
+      cart.map((item) => {
+        updateDoc(doc(db, "products", item.id), {
+          stock: item.stock - item.counter,
+        });
       });
-    });
 
-    clearCart();
+      clearCart();
+    }
   };
 
   return (
@@ -67,6 +77,14 @@ export const Form = ({ cart, getTotalPrice, setOrderId, clearCart }) => {
           onChange={(event) =>
             setUserData({ ...userData, email: event.target.value })
           }
+        />
+        <input
+          type="text"
+          className="m-1"
+          placeholder="Confirme su e-mail"
+          name="email"
+          value={checkEmail}
+          onChange={(event) => setCheckEmail(event.target.value)}
         />
         <button className="btn btn-primary m-1" type="submit">
           Finalizar compra

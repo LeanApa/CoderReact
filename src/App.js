@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ItemDetailContainer } from "./components/itemDetailContainer/ItemDetailContainer";
 import { Form } from "./components/form/Form";
 import { Cart } from "./components/cart/Cart";
-import { CartContextProvider } from "./context/CartContext";
+import { CartContextProvider } from "./context/cartContext";
 
 const App = () => {
   return (

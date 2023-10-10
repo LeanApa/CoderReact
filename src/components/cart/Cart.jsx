@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { Form } from "../form/Form";
-import { CartContext } from "../../context/CartContext";
+import { CartContext } from "../../context/cartContext";
 import { CartItem } from "../cartItem/CartItem";
 import { Link } from "react-router-dom";
 import { doc, getDoc, collection } from "firebase/firestore";

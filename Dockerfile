@@ -1,15 +1,21 @@
-FROM ubuntu:latest
+#Etapa de building de la aplicación
+FROM node:latest as builder
 
 WORKDIR /app
 
-COPY package*.json ./
-
-RUN apt update && apt install -y nodejs npm
+COPY package*json ./
 
 RUN npm install
 
-COPY . ./
+COPY . .
 
-EXPOSE 3000
+RUN npm run build
 
-CMD [ "npm", "run", "start" ]
+#Etapa de servir la aplicación
+FROM nginx
+
+WORKDIR /usr/share/nginx/html
+
+COPY --from=builder /app/build .
+
+EXPOSE 80

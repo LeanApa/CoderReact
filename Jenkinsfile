@@ -29,11 +29,11 @@ pipeline {
                 }
             }
         }
-        stage('Test') {
+        /*stage('Test') {
             steps {
                 // Realizar pruebas de verificación aquí (por ejemplo, curl o comprobaciones de archivos)
             }
-        }
+        }*/
         stage('Publish to DockerHub') {
             steps {
                 script {

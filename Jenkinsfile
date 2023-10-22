@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent Docker
     
     environment {
         DOCKER_IMAGE_NAME = 'tp_6'
@@ -25,7 +25,7 @@ pipeline {
                     sh "docker rm $CONTAINER_NAME || true"
                     
                     // Ejecutar el contenedor
-                    sh "docker run -d --name $CONTAINER_NAME -p 8080:80 $DOCKER_IMAGE_NAME:$DOCKER_TAG"
+                    sh "docker run -d --name $CONTAINER_NAME -p 3000:80 $DOCKER_IMAGE_NAME:$DOCKER_TAG"
                 }
             }
         }

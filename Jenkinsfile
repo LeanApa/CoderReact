@@ -29,11 +29,20 @@ pipeline {
                 }
             }
         }
-        /*stage('Test') {
+        stage('Check Container Status') {
             steps {
-                // Realizar pruebas de verificación aquí (por ejemplo, curl o comprobaciones de archivos)
+                script {
+                    def containerStatus = sh(script: "docker ps --filter 'name=nombre_del_contenedor'", returnStatus: true)
+                    if (containerStatus == 0) {
+                        currentBuild.result = 'SUCCESS'
+                        echo 'El contenedor está en ejecución.'
+                    } else {
+                        currentBuild.result = 'FAILURE'
+                        error 'El contenedor no está en ejecución.'
+                    }
+                }
             }
-        }*/
+        }
         stage('Publish to DockerHub') {
             steps {
                 script {

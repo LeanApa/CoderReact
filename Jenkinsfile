@@ -1,5 +1,5 @@
 pipeline {
-    agent Docker
+    agent any
     
     environment {
         DOCKER_IMAGE_NAME = 'tp_6'

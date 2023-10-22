@@ -3,7 +3,7 @@ pipeline {
     
     environment {
         DOCKER_IMAGE_NAME = 'tp_6'
-        DOCKER_TAG = "${env.BUILD_NUMBER}"
+        DOCKER_TAG = "1.${env.BUILD_NUMBER}"
         CONTAINER_NAME = 'tp_6-React'
         DOCKERHUB_REPO = 'lean2026/tp_6'
     }
